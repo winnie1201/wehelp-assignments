@@ -11,6 +11,10 @@
                 font-size:20px;
                 width:100%;
             }
+            .btn{
+                justify-content: right;
+                display: none;
+            }
             .nav{
                 text-align:center;
                 width:100%;
@@ -68,25 +72,36 @@
             .img{
                 text-align: center;
                 width:90%;
-            
             }
-            
+            .btn{
+                justify-content: right;
+                display: block;
+            }
+            .nav ul{
+                display:flex;/*讓下一層次項目水平對齊*/
+                list-style:none;
+                margin:auto;  
+                justify-content:flex-end; /*水平對齊*/
+                display:none;
+            }
         }
     </style>
 </head>
 <body>
     <div class="head">
         <div>myWebsite</div>
+        
         <div class="nav">
-            <ul>
+            <ul> 
                 <li>item1</li>
                 <li>item2</li>
                 <li>item3</li>
                 <li>item4</li>
             </ul>
         </div>
-  
-        
+        <button class="btn">
+            <img src="btn.png" width="20px">
+       </button>
     </div>
     <div class="title">
         <div class="content">welcome to myhome</div>
