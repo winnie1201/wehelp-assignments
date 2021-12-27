@@ -42,36 +42,82 @@
             }
             .imgbox{
                 display:flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-                width:100%;
+                justify-content:center;
+                width:1200px;
+                margin:auto;
+            }
+            .imgbox2{
+                display:flex;
+                justify-content:center;
+                width:1200px;
+                margin:auto;
             }
             .img{
-                text-align: center;
-                width:25%;
-                flex:none;  
-               
+                margin-right:10px;
+                flex:none;         
             }
             .img p{
-                width:250px;
+                width:300px;
                 background-color:darkgrey;
                 margin:auto;
+                text-align: center;
             }
         
         @media screen and (min-width:600px) and (max-width:1201px){
             
+            .imgbox{
+                display:flex;
+                flex-wrap: wrap;
+                justify-content:center;
+                width:50%;
+                margin:auto;
+            }
+            .imgbox2{
+                display:flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                width:50%;
+                margin:auto;
+               
+            }
             .img{
+                
+                margin-right:10px;
+                flex:none;   
+            }
+            .img p{
+                width:300px;
+                background-color:darkgrey;
+                margin:auto;
                 text-align: center;
-                width:45%;
             }
           
         }
         @media screen and (max-width:600px) {
             
-            .img{
-                text-align: center;
+            .imgbox{
+                display:flex;
+                flex-wrap: wrap;
+                justify-content:center;
                 width:90%;
+                margin:auto;
+            }
+            .imgbox2{
+                display:flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                width:90%;
+                margin:auto;
+            }
+            .img{
+                margin-right:10px;
+                flex:none;   
+            }
+            .img p{
+                width:300px;
+                background-color:darkgrey;
+                margin:auto;
+                text-align: center;
             }
             .btn{
                 justify-content: right;
@@ -106,41 +152,43 @@
     <div class="title">
         <div class="content">welcome to myhome</div>
     </div>
-    <div class="imgbox">
-        
+    <div>
+        <div class="imgbox">
             <div class="img">
-                <img src="花.jpg" width="250px" alt="">
+                <img src="花.jpg" width="300px;" alt="">
                 <p>title1</p>
             </div>
             <div class="img">
-                <img src="花.jpg" width="250px" alt="">
+                <img src="花.jpg" width="300px" alt="">
                 <p>title2</p>
             </div>
             <div class="img">
-                <img src="花.jpg" width="250px" alt="">
+                <img src="花.jpg" width="300px" alt="">
                 <p>title3</p>
             </div>
             <div class="img">
-                <img src="花.jpg" width="250px" alt="">
+                <img src="花.jpg" width="300px" alt="">
                 <p>title4</p>
             </div>
+        </div>
+        <div  class="imgbox2">
             <div class="img">
-                <img src="花.jpg" width="250px" alt="">
+                <img src="花.jpg" width="300px" alt="">
                 <p>title5</p>
             </div>
             <div class="img">
-                <img src="花.jpg" width="250px" alt="">
+                <img src="花.jpg" width="300px" alt="">
                 <p>title6</p>
             </div>
             <div class="img">
-                <img src="花.jpg" width="250px" alt="">
+                <img src="花.jpg" width="300px" alt="">
                 <p>title7</p>
             </div>
             <div class="img">
-                <img src="花.jpg" width="250px" alt="">
+                <img src="花.jpg" width="300px" alt="">
                 <p>title8</p>
             </div>
-       
+       </div>
     </div>
 </body>
 </html>
