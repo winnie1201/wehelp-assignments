@@ -103,28 +103,43 @@
                 display: block;
             }
             .nav ul{
-                display:flex;/*讓下一層次項目水平對齊*/
-                list-style:none;
-                margin:auto;  
-                justify-content:flex-end; /*水平對齊*/
                 display:none;
+                position:absolute;
+                left:80%;
+                top:30px;
+                background-color: beige;
+            }
+            .nav ul li{
+                text-align: center;
+                
             }
         }
     </style>
+    <script>
+        function toggleMenu(){
+           let menu= document.getElementById("menu");
+           if (menu.style.display=="none"){
+               menu.style.display="block";
+           }else{
+            menu.style.display="none";
+           }
+           
+        }
+    </script>
 </head>
 <body>
     <div class="head">
         <div>myWebsite</div>
         
         <div class="nav">
-            <ul> 
+            <ul id="menu"> 
                 <li>item1</li>
                 <li>item2</li>
                 <li>item3</li>
                 <li>item4</li>
             </ul>
         </div>
-        <button class="btn">
+        <button onclick="toggleMenu()" class="btn">
             <img src="btn.png" width="20px">
        </button>
     </div>
