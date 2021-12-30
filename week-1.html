@@ -103,7 +103,7 @@
                 display: block;
             }
             .nav ul{
-                display:none;
+                display: none;
                 position:absolute;
                 left:80%;
                 top:30px;
@@ -111,19 +111,24 @@
             }
             .nav ul li{
                 text-align: center;
-                
             }
+            
+            
         }
     </style>
     <script>
-        function toggleMenu(){
+          function toggleMenu(){
            let menu= document.getElementById("menu");
-           if (menu.style.display=="none"){
+           /*menu.classList.toggle("hide");*/
+                
+           if (menu.style.display==""){
                menu.style.display="block";
+           }else if(menu.style.display=="none"){
+            menu.style.display="block";
            }else{
             menu.style.display="none";
            }
-           
+        
         }
     </script>
 </head>
