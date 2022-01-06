@@ -56,17 +56,31 @@ print(maxProduct([-1,-2,0]))
 
 
 
+#def twoSum(nums, target):
+#    i=0
+#   j=i+1
+#    length=len(nums)
+#    while i<length:
+#        while j<length:
+#            num=nums[i]+nums[j]
+#            if num==target:
+#                return[i,j]
+#            j+=1
+#        i+=1
+    
+#result=twoSum([2, 11, 7, 15], 9)
+#print(result) # show [0, 2] because nums[0]+nums[2] is 9
+
+
 def twoSum(nums, target):
-    i=0
-    j=i+1
-    length=len(nums)
-    while i<length:
-        while j<length:
-            num=nums[i]+nums[j]
-            if num==target:
+    sum=0
+    for i in range(0,len(nums)):
+        for j in range(1,len(nums)):
+            sum=nums[i]+nums[j]
+            if sum==target:
                 return[i,j]
-            j+=1
-        i+=1
+    print(sum)
+
     
 result=twoSum([2, 11, 7, 15], 9)
 print(result) # show [0, 2] because nums[0]+nums[2] is 9
