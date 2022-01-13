@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+    <title>week-1</title>
+    <style>
+            body{
+                margin:0px;
+            }
+            .head{
+                display:flex;
+                font-size:20px;
+                width:100%;
+                
+            }
+            .btn{
+                justify-content: right;
+                display: none;
+            }
+            .nav{
+                text-align:center;
+                width:100%;
+            }
+            .nav ul{
+                display:flex;/*讓下一層次項目水平對齊*/
+                list-style:none;
+                margin:auto;  
+                justify-content:flex-end; /*水平對齊*/
+            }
+            .nav ul li{
+                margin-right: 15px;
+            }
+            .title{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height:300px;
+                background-color: rgb(148, 223, 223);
+                margin-bottom:20px;
+               
+            }
+            .content{
+                font-size: 40px;
+                width:500px;
+                text-align: center;
+            }
+            .imgbox{
+                display:flex;
+                justify-content:center;
+                flex-wrap: wrap;
+                margin:auto;    
+                width:1200px;    
+            }
+       
+            .img{
+                margin-right:10px;
+                width:calc(25% - 50px);
+
+            }
+            .img img{
+                width:100%;
+                aspect-ratio: 16/9;
+            }
+            
+
+            .img p{
+                max-width:100%;
+                background-color:darkgrey;
+                text-align: center;
+                font-size: 15px;
+                margin-top:-4px;
+                height:40px;
+                padding-top: 20px;
+            }
+            .box{
+                width:100%;
+            }
+        @media screen and (min-width:600px) and (max-width:1201px){
+            .imgbox{
+                width:100%;    
+            }
+       
+            .img{
+                margin-right:10px;
+                width:calc(45% - 50px);
+            }
+            .img p{
+                font-size:20px;
+                padding-top: 18px;
+            }
+        }
+        @media screen and (max-width:600px) {
+            .imgbox{
+                width:100%;    
+            }
+            .img{
+                margin-right:10px;
+                width:calc(90% - 20px);
+            }
+            .img p{
+                font-size: 20px;
+            }
+            .btn{
+                justify-content: right;
+                display: block;
+            }
+            .nav ul{
+                display: none;
+                position:absolute;
+                left:80%;
+                top:30px;
+                background-color: beige;
+            }
+            .nav ul li{
+                text-align: center;
+            }
+            
+            
+        }
+    </style>
+    <script>
+          window.onload=function(){getJSON();};
+        
+            function getJSON(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.responseType = 'json';
+                xhr.onload = function() {
+                    let status = xhr.status;
+                    if (status === 200) {
+                        callback(null, xhr.response);
+                    } else {
+                        callback(status, xhr.response);
+                    }
+                };
+                xhr.send();
+            }
+            getJSON('https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json',
+            function(err, data) {
+                if (err !== null) {
+                    alert('Something went wrong: ' + err);
+                } else {
+                    for(let i=0;i<8;i++){  
+                        let stitle=data.result.results[i].stitle;
+                        console.log(stitle);
+                      //  let file=data.result.results[i].file;
+                        let fileString = data.result.results[i].file;
+                        fileString = fileString.replaceAll("https","\nhttps");
+                        let fileList = fileString.split('\n');
+                        console.log(fileList[1]);
+                        fn(stitle, fileList);
+                    } 
+                }
+            });
+           
+           function toggleMenu(){
+                let menu= document.getElementById("menu");
+                /*menu.classList.toggle("hide");*/
+                if (menu.style.display==""){
+                    menu.style.display="block";
+                }else if(menu.style.display=="none"){
+                    menu.style.display="block";
+                }else{
+                    menu.style.display="none";
+                }
+        }
+        function fn(title,filelist){
+            for(let i=0;i<1;i++){
+                let div = document.createElement('div');
+                let img = document.createElement('img'); 
+                let p = document.createElement('p');
+                let imgbox = document.getElementById("imgbox");
+
+                div.className = "img";
+                img.src = filelist[1];
+                p.textContent=title;
+                
+                
+                div.appendChild(img);
+                div.appendChild(p);
+                imgbox.appendChild(div);
+            }
+        
+        }
+        
+    </script>
+</head>
+<body>
+    <div class="head">
+        <div>myWebsite</div>
+        
+        <div class="nav">
+            <ul id="menu"> 
+                <li>item1</li>
+                <li>item2</li>
+                <li>item3</li>
+                <li>item4</li>
+            </ul>
+        </div>
+        <button onclick="toggleMenu()" class="btn">
+            <img src="btn.png" width="20px">
+       </button>
+    </div>
+    <div class="title">
+        <div class="content">welcome to myhome</div>
+    </div>
+    
+    <div class="box">
+         <div class="imgbox" id="imgbox">
+        <!--    <div class="img">
+                <img src="花.jpg" alt="">
+                <p>title1</p>
+            </div>
+            <div class="img">
+                <img src="花.jpg" alt="">
+                <p>title2</p>
+            </div>
+            <div class="img">
+                <img src="花.jpg" alt="">
+                <p>title3</p>
+            </div>
+            <div class="img">
+                <img src="花.jpg" alt="">
+                <p>title4</p>
+            </div>
+            <div class="img">
+                <img src="花.jpg" alt="">
+                <p>title5</p>
+            </div>
+            <div class="img">
+                <img src="花.jpg" alt="">
+                <p>title6</p>
+            </div>
+            <div class="img">
+                <img src="花.jpg" alt="">
+                <p>title7</p>
+            </div>
+            <div class="img">
+                <img src="花.jpg" alt="">
+                <p>title8</p>
+            </div> -->
+        
+            
+            </div>
+       </div>
+    
+</body>
+</html>
