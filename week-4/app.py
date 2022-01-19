@@ -1,9 +1,3 @@
-#初始化資料庫連線
-import pymongo
-client=pymongo.MongoClient("mongodb://root:root123@mycluster.whiup.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-db = client.test #選擇操作test資料庫
-print("資料庫連線建立成功")
-
 from flask import *
 app=Flask(
     __name__,
