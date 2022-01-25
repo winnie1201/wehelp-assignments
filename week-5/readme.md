@@ -1,5 +1,7 @@
-使用 INSERT 指令新增一筆資料到 member 資料表中，這筆資料的 username 和
-password 欄位必須是 test。接著繼續新增至少 4 筆隨意的資料。
+在資料庫中，建立會員資料表，取名字為 member。資料表必須包含以下欄位設定：
+![image](https://github.com/winnie1201/wehelp-assignments/blob/main/week-5/member.JPG)
+
+使用 INSERT 指令新增一筆資料到 member 資料表中，這筆資料的 username 和password 欄位必須是 test。接著繼續新增至少 4 筆隨意的資料。
 
 insert into member(name,username,password)-> values('winnie','test','test','500');
 insert into member(name,username,password)-> values('jack','qazwsx','123456''300');
@@ -52,3 +54,17 @@ select sum(follower_count)/count(name) from member;
 
 ![image](https://github.com/winnie1201/wehelp-assignments/blob/main/week-5/9.JPG)
 
+在資料庫中，建立新資料表，取名字為 message。資料表中必須包含以下欄位設定:
+
+![image](https://github.com/winnie1201/wehelp-assignments/blob/main/week-5/10.JPG)
+
+使用 SELECT 搭配 JOIN 語法，取得所有留言，結果須包含留言者會員的姓名。
+select member.name,message.content from message-> join member on message.member_id=member.id;
+
+
+![image](https://github.com/winnie1201/wehelp-assignments/blob/main/week-5/11.JPG)
+使用 SELECT 搭配 JOIN 語法，取得 member 資料表中欄位 username 是 test 的所有留言，資料中須包含留言者會員的姓名。
+select member.*,message.content from member -> join message on message.member_id=member.id-> where member.username='test';
+
+
+![image](https://github.com/winnie1201/wehelp-assignments/blob/main/week-5/12.JPG)
