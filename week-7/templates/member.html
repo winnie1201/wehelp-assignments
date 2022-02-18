@@ -12,7 +12,6 @@
             border:1px solid blue;
             text-align: center;
             margin:auto;
-            
         }
         .head{
             background-color: rgb(140, 140, 214);
@@ -21,7 +20,6 @@
             font-weight:bold;
             line-height: 60px;
             font-size:20px;
-           
         }
         .innerbox{
             margin-top:40px;
@@ -35,33 +33,49 @@
     <div class="box">
         <div class="head">歡迎光臨，這是會員頁</div>
         <div class="innerbox">
-            {{ data }}，歡迎登入系統
+            <span id="data">{{ data }}</span>，歡迎登入系統
             <br/>
             <a href="/signout">登出系統</a>
         </div>
         <hr/>
-        <form action="/member" method="POST">查詢會員姓名
-            <br/>
-            <br/>
-           <input type="text" name="name"/>
-                <button name="submit" value="search">查詢</button>
+        <h3>查詢會員姓名</h3>
+           <input type="text" id="name"/>
+                <button onclick="check();">查詢</button>
                 <br/>
                 <br/>
-                {{ searchResult }}
-        </form>
-        <br/>
+                <div id="checkname">{{ searchResult }}</div>
         <hr/>
-        <form action="/member" method="POST">更新我的姓名
-            <br/>
-            <br/>
-           <input type="text" name="name"/>
-                <button name="submit" value="update">更新</button>
+        <h3>更新我的姓名</h3>
+           <input type="text" id="upname"/>
+                <button onclick="update();">更新</button>
                 <br/>
                 <br/>
-                {{ updateResult }}
-        </form>
-      
+                <div id="updatename">{{ updateResult }}</div>
     </div>
+    <script>
+        function check(){
+            let check=document.getElementById("checkname");
+            let result = "";
+            fetch('http://127.0.0.1:3000/api/members/check/'+ document.getElementById("name").value, {
+                    method: 'get',
+                })
+            .then(res => {
+                return res.text().then(text => {document.getElementById("checkname").innerText = text;});
+            });  
+        }
+        function update(){
+            let update=document.getElementById("updatename");
+            fetch('http://127.0.0.1:3000/api/members/update/'+ document.getElementById("upname").value, {
+                method: 'get',
+                })
+            .then(res => res.json())
+            .then(result =>{
+                console.log(result);
+                document.getElementById("updatename").innerText = result["result"];
+                document.getElementById("data").innerText = result["nickname"];
+            }); 
+        }
+    </script>   
     
 </body>
 </html>
