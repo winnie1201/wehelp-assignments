@@ -56,8 +56,7 @@ def signin():
     # 根據接收到的資料跟資料庫互動
     cursor = db.cursor()
     # 檢查會員集合中是否有相同資料
-    cursor.execute("select name,username,password from member where username=%s and password =%s ",
-                   [username, password])
+    cursor.execute("select name,username,password from member where username=%s and password =%s ", [username, password])
     rec = cursor.fetchone()
 
     result = "帳號或密碼錯誤"
@@ -80,39 +79,34 @@ def member():
         return redirect("/")
 
 
-@app.route("/member", methods=["POST"])
-def membercheck():
-    if request.form["submit"] == "search":
-        name = request.form["name"]
-        cursor = db.cursor(buffered=True)
-        cursor.execute("select name from member where name=%s", [name])
-        rec = cursor.fetchone()
-        result = "查無此人"
-        cursor.close()
-        if rec == None:            
-            return render_template("member.html", data=session["nickname"], searchResult=result)
-        else:
-            return render_template("member.html", data=session["nickname"], searchResult=rec[0])
-    elif request.form["submit"] == "update":
-        name = request.form["name"]
-        cursor = db.cursor()
-        res = cursor.execute("update member set name=%s where name=%s and username=%s", [name, session["nickname"],session["username"]])
-        db.commit()
-        session["nickname"]=name
-        result = "更新成功"
-        print(session["nickname"])
-        return render_template("member.html", data=session["nickname"], updateResult=result)
-        
-
-
-
-
-
 @app.route("/signout")
 def signout():
     del session["username"]
     return redirect("/")
 
+@app.route("/api/members/check/<name>")
+def membercheck(name):
+    print(name)
+    cursor = db.cursor(buffered=True)
+    cursor.execute("select name from member where name=%s", [name])
+    rec = cursor.fetchone()
+    result = "查無此人"
+    cursor.close()
+    if rec == None:            
+        return result
+    else:
+        return name
+      
+@app.route("/api/members/update/<name>")
+def memberupdate(name):
+    print(name)
+    cursor = db.cursor()
+    res = cursor.execute("update member set name=%s where name=%s and username=%s", [name, session["nickname"],session["username"]])
+    db.commit()
+    session["nickname"]=name
+    result = "更新成功"
+    print(session["nickname"])
+    return {"result":result, "nickname":session["nickname"]}
 
 @app.route("/api/members", methods=["GET"])
 def api():
@@ -134,8 +128,6 @@ def api():
                 'username': records[2],
             }
         }
-
     return jsonify(data)
-
 
 app.run(port=3000, debug=True)  # 透過port改變埠號
