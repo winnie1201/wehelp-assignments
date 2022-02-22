@@ -56,7 +56,7 @@
         function check(){
             let check=document.getElementById("checkname");
             let result = "";
-            fetch('http://127.0.0.1:3000/api/members/check/'+ document.getElementById("name").value, {
+            fetch('http://127.0.0.1:3000/api/members/'+ document.getElementById("name").value, {
                     method: 'get',
                 })
             .then(res => {
@@ -65,8 +65,8 @@
         }
         function update(){
             let update=document.getElementById("updatename");
-            fetch('http://127.0.0.1:3000/api/members/update/'+ document.getElementById("upname").value, {
-                method: 'get',
+            fetch('http://127.0.0.1:3000/api/members/'+ document.getElementById("upname").value, {
+                method: 'post',
                 })
             .then(res => res.json())
             .then(result =>{
