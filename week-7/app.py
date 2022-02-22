@@ -84,9 +84,32 @@ def signout():
     del session["username"]
     return redirect("/")
 
-@app.route("/api/members/check/<name>")
+# @app.route("/api/members/check/<name>")
+# def membercheck(name):
+#     print(name)
+#     cursor = db.cursor(buffered=True)
+#     cursor.execute("select name from member where name=%s", [name])
+#     rec = cursor.fetchone()
+#     result = "查無此人"
+#     cursor.close()
+#     if rec == None:            
+#         return result
+#     else:
+#         return name
+      
+# @app.route("/api/members/update/<name>")
+# def memberupdate(name):
+#     print(name)
+#     cursor = db.cursor()
+#     res = cursor.execute("update member set name=%s where name=%s and username=%s", [name, session["nickname"],session["username"]])
+#     db.commit()
+#     session["nickname"]=name
+#     result = "更新成功"
+#     print(session["nickname"])
+#     return {"result":result, "nickname":session["nickname"]}
+
+@app.route("/api/members/<name>", methods=["GET"])
 def membercheck(name):
-    print(name)
     cursor = db.cursor(buffered=True)
     cursor.execute("select name from member where name=%s", [name])
     rec = cursor.fetchone()
@@ -96,22 +119,11 @@ def membercheck(name):
         return result
     else:
         return name
-      
-@app.route("/api/members/update/<name>")
-def memberupdate(name):
-    print(name)
-    cursor = db.cursor()
-    res = cursor.execute("update member set name=%s where name=%s and username=%s", [name, session["nickname"],session["username"]])
-    db.commit()
-    session["nickname"]=name
-    result = "更新成功"
-    print(session["nickname"])
-    return {"result":result, "nickname":session["nickname"]}
 
-@app.route("/api/members", methods=["GET"])
+@app.route("/api/members/", methods=["GET"])
 def api():
     if "username" in request.values:
-        username = request.values["username"]
+        username=request.args.get("username",None)
     cursor = db.cursor()
     # 檢查會員集合中是否有相同資料
     cursor.execute("select id,name,username from member where username=%s", [username])
@@ -130,4 +142,13 @@ def api():
         }
     return jsonify(data)
 
+@app.route("/api/members/<name>", methods=["POST"])
+def memberupdate(name):
+    cursor = db.cursor()
+    res = cursor.execute("update member set name=%s where name=%s and username=%s", [name, session["nickname"],session["username"]])
+    db.commit()
+    session["nickname"]=name
+    result = "更新成功"
+    return {"result":result, "nickname":session["nickname"]}
+    
 app.run(port=3000, debug=True)  # 透過port改變埠號
